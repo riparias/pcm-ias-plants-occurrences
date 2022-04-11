@@ -2,7 +2,7 @@
 
 ## Rationale
 
-This repository contains the functionality to standardize the macrophytes data of the [Province East Flanders](https://www.oost-vlaanderen.be/) (POV) to a [Darwin Core Archive](https://ipt.gbif.org/manual/en/ipt/2.5/dwca-guide) that can be harvested by a [GBIF IPT](https://ipt.gbif.org/manual/en/ipt/2.5/).
+This repository contains the functionality to standardize the alien plants data of the [Province East Flanders](https://www.oost-vlaanderen.be/) (POV) to a [Darwin Core Archive](https://ipt.gbif.org/manual/en/ipt/2.5/dwca-guide) that can be harvested by a [GBIF IPT](https://ipt.gbif.org/manual/en/ipt/2.5/).
 
 ## Workflow
 
