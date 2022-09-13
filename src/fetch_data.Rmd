@@ -42,14 +42,14 @@ pov_client <- ows4R::WFSClient$new(wfs, serviceVersion = "2.0.0")
 
 Overview of the layers available:
 
-```{r}
+```{r layers}
 layers <- pov_client$getFeatureTypes(pretty = TRUE)
 print(layers)
 ```
 
 Request data from layer `Waarnemingen_Public:Invasieve_uitheemse_soorten`:
 
-```{r}
+```{r request}
 url <- httr::parse_url(wfs)
 url$query <- list(service = "wfs",
                   request = "GetFeature",

@@ -34,13 +34,13 @@ library(rgbif)          # To use GBIF services
 
 Create a data frame `input_data` from the source data:
 
-```{r}
 input_data <- read_excel(path = here("data", "raw", "checklist.xlsx")) 
+```{r read_inputs}
 ```
 
 Preview data:
 
-```{r}
+```{r preview_input_data}
 input_data %>% head(n = 5)
 ```
 
