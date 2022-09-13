@@ -34,8 +34,10 @@ library(rgbif)          # To use GBIF services
 
 Create a data frame `input_data` from the source data:
 
-input_data <- read_excel(path = here("data", "raw", "checklist.xlsx")) 
 ```{r read_inputs}
+input_data <- readr::read_csv(
+  path = here("data", "raw", "invasieve_uitheemse_soorten.csv")
+) 
 ```
 
 Preview data:
