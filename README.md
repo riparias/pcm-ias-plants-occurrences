@@ -6,7 +6,8 @@ This repository contains the functionality to standardize the alien plants data 
 
 ## Workflow
 
-[source data](data/raw) → Darwin Core [mapping script](src/dwc_mapping.Rmd) → generated [Darwin Core files](data/processed)
+fetch data from WFS → save them as local [source data](data/raw) → Darwin Core [mapping script](src/dwc_mapping.Rmd) → generated [Darwin Core files](data/processed)
+
 
 ## Published dataset
 
@@ -18,22 +19,32 @@ This repository contains the functionality to standardize the alien plants data 
 The repository structure is based on [Cookiecutter Data Science](http://drivendata.github.io/cookiecutter-data-science/) and the [Checklist recipe](https://github.com/trias-project/checklist-recipe). Files and directories indicated with `GENERATED` should not be edited manually.
 
 ```
-├── README.md                           : Description of this repository
-├── LICENSE                             : Repository license
-├── pov-ias-plants-occurrences.Rproj    : RStudio project file
-├── .gitignore                          : Files and directories to be ignored by git
+├── README.md              : Description of this repository
+├── LICENSE                : Repository license
+├── pov-ias-plants-occurrences.Rproj : RStudio project file
+├── .gitignore             : Files and directories to be ignored by git
 │
+├── .github                
+│   ├── PULL_REQUEST_TEMPLATE.md : Pull request template
+│   └── workflows
+│   │   ├── fetch-data.yaml    : GitHub action to fetch raw data
+│   │   └── mapping_and_testing.yaml : GitHub action to map data to DwC and perform some tests on the Dwc output
+|
 ├── src
-│   └── dwc_mapping.Rmd    : Darwin Core mapping script
+│   ├── fetch_data.Rmd     : Fetchin data script
+│   ├── dwc_mapping.Rmd    : Darwin Core mapping script
+│   ├── run_fetch_data.R   : R script to run code in fetch_data.Rmd in an automatic way within a GitHub action
+│   ├── run_dwc_mapping.R  : R script to run code in dcw_mapping.Rmd in an automatic way within a GitHub action
+│   └── install_packages.R : R script to install all needed packages
 |
 ├── sql                    : Darwin Core transformations
-│   ├── dwc_event.sql
-│   ├── dwc_occurrence.sql
-│   └── dwc_mof.sql
-|
+│   └── dwc_occurrence.sql
+│   
 └── data
-    ├── raw                : Source data, input for mapping script
-    └── processed          : Darwin Core output of mapping script GENERATED
+│   ├── raw                : Source data to fetch
+│   ├── external           : External data used during the mapping
+│   ├── interim            : All fetched data, input for mapping script
+│   └── processed          : Darwin Core output of mapping script GENERATED
 ```
 
 ## Installation
