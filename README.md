@@ -1,5 +1,5 @@
 [![funding](https://img.shields.io/static/v1?label=published+through&message=LIFE+RIPARIAS&labelColor=00a58d&color=ffffff)](https://www.riparias.be/)
-[![fetch-data](https://github.com/riparias/pov-plants-occurrences/actions/workflows/fetch-data.yaml/badge.svg)](https://github.com/riparias/pov-plants-occurrences/actions/workflows/fetch-data.yaml)
+[![fetch-data](https://github.com/riparias/pov-ias-plants-occurrences/actions/workflows/fetch-data.yaml/badge.svg)](https://github.com/riparias/pov-ias-plants-occurrences/actions/workflows/fetch-data.yaml)
 
 ## Rationale
 
