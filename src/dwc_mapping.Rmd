@@ -30,13 +30,13 @@ library(digest)         # To generate hashes
 library(rgbif)          # To use GBIF services
 ```
 
-# Read source data
+## Read source data
 
 Create a data frame `input_data` from the source data:
 
 ```{r read_inputs}
 input_data <- readr::read_csv(
-  path = here("data", "raw", "invasieve_uitheemse_soorten.csv")
+  file = here::here("data", "raw", "invasieve_uitheemse_soorten.csv")
 ) 
 ```
 
@@ -45,15 +45,41 @@ Preview data:
 ```{r preview_input_data}
 input_data %>% head(n = 5)
 ```
+## Create database
 
-# Process source data
+Create a SQLite database with the source data, so it can be queried with SQL in the next steps:
 
-## Tidy data
+```{r create_db}
+message("Create in memory SQLite database...")
+con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+# import occurrences
+DBI::dbWriteTable(con, "occurrences", occurrences)
+# import occurrences to filter out
+DBI::dbWriteTable(con, "life_mica_obs", life_mica_obs)
+message("DONE")
+```
 
-Clean data somewhat:
+# Darwin Core mapping
 
-```{r}
-input_data %<>% remove_empty("rows")
+Create [Occurrence](https://rs.gbif.org/core/dwc_occurrence_2022-02-02.xml) extension:
+
+```{r occurrence}
+message("Map occurrences to DwC...")
+dwc_occurrence_sql <- glue::glue_sql(
+  readr::read_file(here::here("sql", "dwc_occurrence.sql")), 
+  .con = con)
+dwc_occurrence <- DBI::dbGetQuery(con, dwc_occurrence_sql)
+message("DONE")
+```
+
+# Save data to CSV
+
+```{r save_csv}
+readr::write_csv(
+  dwc_occurrence,
+  here::here("data", "processed", "occurrence.csv"),
+  na = ""
+)
 ```
 
 ## Scientific names
@@ -62,7 +88,7 @@ Use the [GBIF nameparser](https://www.gbif.org/tools/name-parser) to retrieve no
 
 ```{r}
 parsed_names <- input_data %>%
-  distinct(scientific_name) %>%
+  distinct(.data$ScientificName) %>%
   pull() %>% # Create vector from dataframe
   parsenames() # An rgbif function
 ```
