@@ -42,8 +42,8 @@ The repository structure is based on [Cookiecutter Data Science](http://drivenda
 │   └── dwc_occurrence.sql
 │   
 └── data
-│   ├── raw                : Source data to fetch
-│   ├── interim            : All fetched data, input for mapping script
+│   ├── raw                : Fetched data
+│   ├── interim            : sqlite database, input for mapping script
 │   └── processed          : Darwin Core output of mapping script GENERATED
 ```
 
