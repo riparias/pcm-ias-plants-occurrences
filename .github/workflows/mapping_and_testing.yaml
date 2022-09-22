@@ -1,18 +1,12 @@
 on:
-  schedule:
-    - cron: "0 * * * *"
-
   push:
     branches:
-    - main
-    paths:
-    - data/raw/**
+      - 'automatic**'
 
-
-name: fetch-data
+name: mapping and testing
 
 jobs:
-  fetch-data:
+  mapping:
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
@@ -25,15 +19,16 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.WORKFLOWS }}
       GITHUB_TOKEN: ${{ secrets.WORKFLOWS }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2.3.4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.WORKFLOWS }}
 
+      - name: Get branch name
+        run: |
+          git branch --show-current
       - name: Setup R
         uses: r-lib/actions/setup-r@master
         with:
@@ -55,9 +50,9 @@ jobs:
           source("src/install_packages.R")
         shell: Rscript {0}
 
-      - name: Fetch data
+      - name: Mapping to DwC
         run: |
-          source("src/run_fetch_data.R")
+          source("src/run_dwc_mapping.R")
         shell: Rscript {0}
 
       - name: Commit and push changes
@@ -65,21 +60,9 @@ jobs:
         with:
           github_token: ${{ secrets.WORKFLOWS }}
           commit_prefix: "[AUTO]"
-          commit_message: "Fetch data"
-          target_branch: automatic-update
-          add_timestamp: true
+          commit_message: "Mapping"
 
-      - name: Get branch name
+      - name: Run tests
         run: |
-          git branch --show-current
-
-      - name: Create pull request
-        uses: devops-infra/action-pull-request@v0.4.2
-        with:
-          github_token: ${{ secrets.WORKFLOWS }}
-          target_branch: main
-          title: "[AUTO] Update data"
-          template: .github/PULL_REQUEST_TEMPLATE.md
-          reviewer: damianooldoni
-          label: automated workflow
-          get_diff: false
+          source("tests/test_dwc_occurrence.R")
+        shell: Rscript {0}

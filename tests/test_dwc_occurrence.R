@@ -35,7 +35,8 @@ testthat::test_that("Right columns in right order", {
     "verbatimLongitude",
     "verbatimSRS",
     "scientificName",
-    "kingdom"
+    "kingdom",
+    "vernacularName"
   )
   testthat::expect_equal(names(dwc_occurrence_update), columns)
 })
