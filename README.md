@@ -33,7 +33,7 @@ The repository structure is based on [Cookiecutter Data Science](http://drivenda
 │   │   └── mapping_and_testing.yaml : GitHub action to map data to DwC and perform some tests on the Dwc output
 |
 ├── src
-│   ├── fetch_data.Rmd     : Fetchin data script
+│   ├── fetch_data.Rmd     : Fetching data script
 │   ├── dwc_mapping.Rmd    : Darwin Core mapping script
 │   ├── run_fetch_data.R   : R script to run code in fetch_data.Rmd in an automatic way within a GitHub action
 │   ├── run_dwc_mapping.R  : R script to run code in dcw_mapping.Rmd in an automatic way within a GitHub action
