@@ -27,9 +27,9 @@ SELECT
     ELSE NULL
   END                                   AS organismQuantityType,
   -- LOCATION
-  "Europe"                              AS continent,
-  "BE"                                  AS countryCode,
-  "East Flanders"                       AS stateProvince,
+  'Europe'                              AS continent,
+  'BE'                                  AS countryCode,
+  'East Flanders'                       AS stateProvince,
   printf('%.5f', ROUND(o."Y", 5))       AS decimalLatitude,
   printf('%.5f', ROUND(o."X", 5))       AS decimalLongitude,
   'WGS84'                               AS geodeticDatum,

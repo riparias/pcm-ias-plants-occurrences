@@ -102,3 +102,79 @@ readr::write_csv(
   na = ""
 )
 ```
+
+# Overview changes
+
+In this section we summarize the changes in the DwC output after the very last udpate.
+
+## Read DwC files
+
+Read DwC mapping files from both `main`:
+
+```{r main}
+dwc_occurrence_main <- readr::read_csv(
+  file = "https://raw.githubusercontent.com/riparias/pov-ias-plants-occurrences/main/data/processed/occurrence.csv",
+  col_types = readr::cols(.default = "c"))
+```
+
+and actual branch (`automatic-update-*`):
+ 
+```{r automatic-update}
+dwc_occurrence_update <- readr::read_csv(
+  file = here::here("data","processed","occurrence.csv"),
+  col_types = readr::cols(.default = "c"))
+```
+
+## Overview
+
+How many new occurrences, i.e. new `occurrenceID` values, have been added?
+
+```{r new_occurrenceID_values}
+new_occs <- 
+  dwc_occurrence_update %>%
+  filter(!.data$occurrenceID %in% dwc_occurrence_main$occurrenceID)
+message("New occurrences:")
+print(new_occs)
+```
+
+Have some occurrences been removed?
+
+```{r removed_occs}
+removed_occs <- 
+  dwc_occurrence_main %>%
+  filter(!.data$occurrenceID %in% dwc_occurrence_update$occurrenceID)
+message("Removed occurrences:")
+print(removed_occs)
+```
+
+Total number of rows of new DwC output in comparison with the previous version:
+
+```{r nrows}
+message(paste("Number of occurrences (new):", nrow(dwc_occurrence_update)))
+message(paste("Number of occurrences (old):", nrow(dwc_occurrence_main)))
+message(paste("Difference:", 
+              nrow(dwc_occurrence_update) - nrow(dwc_occurrence_main))
+)
+```
+
+## New `ScientificName` values
+
+The DwC `scientificName` is a manual mapping of scientific names from field `ScientificName`. It is therefore important to get a list with all new values:
+
+```{r new_ScientificName}
+occs_without_sc_name <- 
+  dwc_occurrence_update %>%
+  filter(is.na(scientificName)) %>%
+  pull(occurrenceID)
+query <- glue::glue_sql("
+  SELECT 
+    DISTINCT o.\"ScientificName\"
+  FROM occurrences AS o 
+  WHERE  
+  o.\"ObservationIdentifier\" IN ({occs_without_sc_name*})
+  ", .con = con)
+query
+raw_sc_names <- dplyr::as_tibble(DBI::dbGetQuery(con, query))
+message("New values in field 'ScientificName' to be mapped:")
+print(raw_sc_names)
+```
