@@ -91,6 +91,20 @@ testthat::test_that("coordinates and uncertainties are always filled in", {
   )
 })
 
+testthat::test_that("decimalLatitude is within Flemish boundaries", {
+  testthat::expect_true(all(dwc_occurrence_update$decimalLatitude < 51.65))
+  testthat::expect_true(all(dwc_occurrence_update$decimalLatitude > 50.63))
+})
+
+testthat::test_that("decimalLongitude is always filled in", {
+  testthat::expect_true(all(!is.na(dwc_occurrence_update$decimalLongitude)))
+})
+
+testthat::test_that("decimalLongitude is within Flemish boundaries", {
+  testthat::expect_true(all(dwc_occurrence_update$decimalLongitude < 5.95))
+  testthat::expect_true(all(dwc_occurrence_update$decimalLongitude > 2.450))
+})
+
 testthat::test_that("eventDate is always filled in", {
   testthat::expect_true(all(!is.na(dwc_occurrence_update$eventDate)))
 })

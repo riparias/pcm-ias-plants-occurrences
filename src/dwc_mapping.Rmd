@@ -27,6 +27,8 @@ library(dplyr)          # To do data wrangling
 library(tidylog)        # To provide feedback on dplyr functions
 library(here)           # To find files
 library(sf)             # To convert coordinate systems
+library(DBI)            # To work with databases
+library(RSQLite)        # To work with SQLite databases in R
 ```
 
 ## Read source data
