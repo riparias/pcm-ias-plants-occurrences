@@ -23,9 +23,14 @@ SELECT
     ELSE NULL
   END                                   AS organismQuantity,
   CASE
-    WHEN o."QuantificationOfInvasion" > 0 THEN 'coverage in ' || o."QuantificationUnit"
+    WHEN o."QuantificationOfInvasion" > 0 AND o."QuantificationUnit" = 'm²' THEN 'coverage in ' || o."QuantificationUnit"
+    WHEN o."QuantificationOfInvasion" > 0 AND o."QuantificationUnit" = 'Individuals' THEN 'individuals'
     ELSE NULL
   END                                   AS organismQuantityType,
+  CASE
+    WHEN o."QuantificationOfInvasion" > 0 AND o."QuantificationUnit" = 'Individuals' THEN o."QuantificationOfInvasion"
+    ELSE NULL
+  END                                   AS individualCount, -- at the moment individualCount is never filled in
   -- LOCATION
   'Europe'                              AS continent,
   'BE'                                  AS countryCode,

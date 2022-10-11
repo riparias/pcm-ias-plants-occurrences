@@ -24,6 +24,7 @@ testthat::test_that("Right columns in right order", {
     "eventDate",
     "organismQuantity",
     "organismQuantityType",
+    "individualCount",
     "continent",
     "countryCode",
     "stateProvince",
@@ -60,13 +61,34 @@ testthat::test_that(
   "organismQuantity is always an integer greater than 0 if present", {
     organismQuantity_values <-
       dwc_occurrence_update %>%
-      dplyr::filter(!is.na(.data$organismQuantity)) %>%
-      dplyr::distinct(.data$organismQuantity) %>%
-      dplyr::pull(.data$organismQuantity)
+      dplyr::filter(!is.na(organismQuantity)) %>%
+      dplyr::distinct(organismQuantity) %>%
+      dplyr::pull(organismQuantity)
     testthat::expect_equal(
       organismQuantity_values, as.integer(organismQuantity_values)
     )
 })
+
+testthat::test_that(
+  "an organismQuantity must have a corresponding organismQuantityType", {
+    organismQuantityType_values <-
+      dwc_occurrence_update %>%
+      dplyr::filter(!is.na(organismQuantity)) %>%
+      dplyr::distinct(organismQuantityType) %>%
+      dplyr::pull(organismQuantityType)
+    testthat::expect_true(all(!is.na(organismQuantityType_values)))
+  })
+
+testthat::test_that(
+  "organismQuantityType is one of the predefined values", {
+    values <- c("coverage in m²", "individuals")
+    organismQuantityType_values <-
+      dwc_occurrence_update %>%
+      dplyr::filter(!is.na(organismQuantityType)) %>%
+      dplyr::distinct(organismQuantityType) %>%
+      dplyr::pull(organismQuantityType)
+    testthat::expect_true(all(organismQuantityType_values %in% values))
+  })
 
 testthat::test_that("coordinates and uncertainties are always filled in", {
   # decimalLatitude
@@ -198,7 +220,7 @@ testthat::test_that(
     species_to_exclude <- c("Fargesia", "Reynoutria")
     occs_with_valid_vernacular_names <-
       dwc_occurrence_update %>%
-      dplyr::filter(!.data$scientificName %in% species_to_exclude)
+      dplyr::filter(!scientificName %in% species_to_exclude)
     testthat::expect_true(
       all(!is.na(occs_with_valid_vernacular_names$vernacularName))
     )
