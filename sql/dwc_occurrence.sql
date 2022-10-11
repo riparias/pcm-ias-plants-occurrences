@@ -23,7 +23,8 @@ SELECT
     ELSE NULL
   END                                   AS organismQuantity,
   CASE
-    WHEN o."QuantificationOfInvasion" > 0 THEN 'coverage in ' || o."QuantificationUnit"
+    WHEN o."QuantificationOfInvasion" > 0 AND o."QuantificationUnit" = 'm²' THEN 'coverage in ' || o."QuantificationUnit"
+    WHEN o."QuantificationOfInvasion" > 0 AND o."QuantificationUnit" = 'Individuals' THEN 'individuals'
     ELSE NULL
   END                                   AS organismQuantityType,
   -- LOCATION
