@@ -45,6 +45,7 @@ SELECT
   END                                   AS coordinateUncertaintyInMeters,
   CAST(o."YLambert72" AS INT)           AS verbatimLatitude,
   CAST(o."XLambert72" AS INT)           AS verbatimLongitude,
+  'Lambert coordinates'                 AS verbatimCoordinateSystem,
   'EPSG:31370'                          AS verbatimSRS,
 -- TAXON
   CASE
