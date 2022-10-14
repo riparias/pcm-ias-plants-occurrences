@@ -4,7 +4,7 @@ Created by Damiano Oldoni (INBO)
 
 SELECT
 -- RECORD-LEVEL
-  'Occurrence'                          AS type,
+  'Event'                               AS type,
   'en'                                  AS language,
   'https://creativecommons.org/licenses/by-nc/4.0/legalcode' AS license,
   'POV'                                 AS rightsHolder,
