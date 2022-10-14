@@ -17,8 +17,7 @@ SELECT
 -- OCCURRENCE
   o."ObservationIdentifier"             AS occurrenceID,
   'present'                             AS occurrenceStatus,
-  date(o."DateOfObservation")           AS eventDate,
-  CASE
+    CASE
     WHEN o."QuantificationOfInvasion" > 0 THEN o."QuantificationOfInvasion"
     ELSE NULL
   END                                   AS organismQuantity,
@@ -34,6 +33,7 @@ SELECT
     ELSE NULL
   END                                   AS individualCount, -- at the moment individualCount is never filled in
 */
+  date(o."DateOfObservation")           AS eventDate,
   -- LOCATION
   'Europe'                              AS continent,
   'BE'                                  AS countryCode,
