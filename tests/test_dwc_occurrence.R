@@ -80,8 +80,8 @@ testthat::test_that(
   })
 
 testthat::test_that(
-  "organismQuantityType is one of the predefined values", {
-    values <- c("coverage in m²", "individuals")
+  "organismQuantityType is one of the predefined values if not NA", {
+    values <- c("coverage in m²") # other value, individuals, doesn't occur yet
     organismQuantityType_values <-
       dwc_occurrence %>%
       dplyr::filter(!is.na(organismQuantityType)) %>%
