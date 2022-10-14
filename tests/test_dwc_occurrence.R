@@ -186,6 +186,14 @@ testthat::test_that("kingdom is always equal to Plantae or Animalia", {
   )
 })
 
+testthat::test_that("taxonRank is always filled in and one of the list", {
+  taxon_ranks <- c("genus", "species", "subspecies")
+  testthat::expect_true(all(!is.na(dwc_occurrence$taxonRank)))
+  testthat::expect_true(
+    all(dwc_occurrence$taxonRank %in% taxon_ranks)
+  )
+})
+
 testthat::test_that(
   "vernacularName is one of the list and NA only for specific cases", {
     vernacular_names <- c(
