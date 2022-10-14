@@ -7,7 +7,6 @@ SELECT
   'Event'                               AS type,
   'en'                                  AS language,
   'https://creativecommons.org/licenses/by-nc/4.0/legalcode' AS license,
-  'http://www.inbo.be/en/norms-for-data-use' AS accessRights,
   'PCM'                                 AS rightsHolder,
   ''                                    AS datasetID,
   'PCM'                                 AS institutionCode,
