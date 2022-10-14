@@ -35,7 +35,6 @@ SELECT
 */
   date(o."DateOfObservation")           AS eventDate,
   -- LOCATION
-  'Europe'                              AS continent,
   'BE'                                  AS countryCode,
   'East Flanders'                       AS stateProvince,
   printf('%.5f', ROUND(o."Y", 5))       AS decimalLatitude,
