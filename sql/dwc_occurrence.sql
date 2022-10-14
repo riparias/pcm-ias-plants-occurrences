@@ -23,6 +23,7 @@ SELECT
   END                                   AS organismQuantity,
   CASE
     WHEN o."QuantificationOfInvasion" > 0 AND o."QuantificationUnit" = 'm²' THEN 'coverage in ' || o."QuantificationUnit"
+    -- this is at the moment never the case
     WHEN o."QuantificationOfInvasion" > 0 AND o."QuantificationUnit" = 'Individuals' THEN 'individuals'
     ELSE NULL
   END                                   AS organismQuantityType,
