@@ -16,7 +16,8 @@ SELECT
 
 -- OCCURRENCE
   o."ObservationIdentifier"             AS occurrenceID,
-  date(o."DateOfObservation")             AS eventDate,
+  'present'                             AS occurrenceStatus,
+  date(o."DateOfObservation")           AS eventDate,
   CASE
     WHEN o."QuantificationOfInvasion" > 0 THEN o."QuantificationOfInvasion"
     ELSE NULL
