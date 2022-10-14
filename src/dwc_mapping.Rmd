@@ -48,6 +48,28 @@ Preview data:
 occurrences %>% head(n = 5)
 ```
 
+# Clean data
+
+Some rows contain duplicates, i.e. same values for all columns except for identifiers:
+
+```{r remove_duplicates}
+occurrences <- 
+  occurrences %>% 
+  distinct(DateOfObservation,
+           DutchName,
+           ScientificName,
+           Kingdom,
+           QuantificationOfInvasion,
+           QuantificationUnit,
+           ValidationStatus,
+           SamplingProtocol,
+           CoordinateUncertainty,
+           XLambert72,
+           YLambert72,
+           .keep_all = TRUE
+)
+```
+
 # Change coordinate system
 
 Data are provided in Belgian Lambert72 ([EPSG 31370](https://epsg.io/31370)) coordinates. DwC accepts data in WGS84 ([EPSG 4326](https://epsg.io/4326)) only.

@@ -4,37 +4,38 @@ Created by Damiano Oldoni (INBO)
 
 SELECT
 -- RECORD-LEVEL
-  'Occurrence'                          AS type,
+  'Event'                               AS type,
   'en'                                  AS language,
   'https://creativecommons.org/licenses/by-nc/4.0/legalcode' AS license,
-  'POV'                                 AS rightsHolder,
-  'http://www.inbo.be/en/norms-for-data-use' AS accessRights,
+  'PCM'                                 AS rightsHolder,
   ''                                    AS datasetID,
-  'POV'                                 AS institutionCode,
-  'Monitoring of invasive alien species by the Provincial Center of Environmental Research, Province East-Flanders, Belgium' AS datasetName,
+  'PCM'                                 AS institutionCode,
+  'Monitoring of invasive alien species by PRM in East Flanders, Belgium' AS datasetName,
   'HumanObservation'                    AS basisOfRecord,
   o."SamplingProtocol"                  AS samplingProtocol, -- casual observation
 
 -- OCCURRENCE
   o."ObservationIdentifier"             AS occurrenceID,
-  date(o."DateOfObservation")             AS eventDate,
-  CASE
+  'present'                             AS occurrenceStatus,
+    CASE
     WHEN o."QuantificationOfInvasion" > 0 THEN o."QuantificationOfInvasion"
     ELSE NULL
   END                                   AS organismQuantity,
   CASE
     WHEN o."QuantificationOfInvasion" > 0 AND o."QuantificationUnit" = 'm²' THEN 'coverage in ' || o."QuantificationUnit"
+    -- this is at the moment never the case
     WHEN o."QuantificationOfInvasion" > 0 AND o."QuantificationUnit" = 'Individuals' THEN 'individuals'
     ELSE NULL
   END                                   AS organismQuantityType,
+/*
   CASE
     WHEN o."QuantificationOfInvasion" > 0 AND o."QuantificationUnit" = 'Individuals' THEN o."QuantificationOfInvasion"
     ELSE NULL
   END                                   AS individualCount, -- at the moment individualCount is never filled in
+*/
+  date(o."DateOfObservation")           AS eventDate,
   -- LOCATION
-  'Europe'                              AS continent,
   'BE'                                  AS countryCode,
-  'East Flanders'                       AS stateProvince,
   printf('%.5f', ROUND(o."Y", 5))       AS decimalLatitude,
   printf('%.5f', ROUND(o."X", 5))       AS decimalLongitude,
   'WGS84'                               AS geodeticDatum,
@@ -42,8 +43,9 @@ SELECT
     WHEN o."CoordinateUncertainty" IS NULL THEN 30
     ELSE o."CoordinateUncertainty"
   END                                   AS coordinateUncertaintyInMeters,
-  o.YLambert72                          AS verbatimLatitude,
-  o.XLambert72                          AS verbatimLongitude,
+  CAST(o."YLambert72" AS INT)           AS verbatimLatitude,
+  CAST(o."XLambert72" AS INT)           AS verbatimLongitude,
+  'Lambert coordinates'                 AS verbatimCoordinateSystem,
   'EPSG:31370'                          AS verbatimSRS,
 -- TAXON
   CASE
@@ -58,7 +60,7 @@ SELECT
     WHEN o."ScientificName" = 'Lagarosiphon major' THEN 'Lagarosiphon major'
     WHEN o."ScientificName" = 'Lithobates catesbeianus' THEN 'Lithobates catesbeianus'
     WHEN o."ScientificName" = 'Ludwigia grandiflora' THEN 'Ludwigia grandiflora'
-    WHEN o."ScientificName" = 'Ludwigia peploides montevidensis' THEN 'Ludwigia peploides montevidensis'
+    WHEN o."ScientificName" = 'Ludwigia peploides montevidensis' THEN 'Ludwigia peploides subsp. montevidensis'
     WHEN o."ScientificName" = 'Lysichiton americanus' THEN 'Lysichiton americanus'
     WHEN o."ScientificName" = 'Microstegium vimineum' THEN 'Microstegium vimineum'
     WHEN o."ScientificName" = 'Myriophyllum aquaticum' THEN 'Myriophyllum aquaticum'
@@ -85,6 +87,44 @@ SELECT
     ELSE NULL
   END                                   AS scientificName,
   o."Kingdom"                           AS kingdom,
+  CASE
+        WHEN o."ScientificName" = 'Cabomba caroliniana' THEN 'species'
+    WHEN o."ScientificName" = 'Eichhornia crassipes' THEN 'species'
+    WHEN o."ScientificName" = 'Elodea nuttallii' THEN 'species'
+    WHEN o."ScientificName" = 'Eriocheir sinensis' THEN 'species'
+    WHEN o."ScientificName" = 'Gunnera tinctoria' THEN 'species'
+    WHEN o."ScientificName" = 'Heracleum mantegazzianum' THEN 'species'
+    WHEN o."ScientificName" = 'Hydrocotyle ranunculoides' THEN 'species'
+    WHEN o."ScientificName" = 'Impatiens glandulifera' THEN 'species'
+    WHEN o."ScientificName" = 'Lagarosiphon major' THEN 'species'
+    WHEN o."ScientificName" = 'Lithobates catesbeianus' THEN 'species'
+    WHEN o."ScientificName" = 'Ludwigia grandiflora' THEN 'species'
+    WHEN o."ScientificName" = 'Ludwigia peploides montevidensis' THEN 'subspecies'
+    WHEN o."ScientificName" = 'Lysichiton americanus' THEN 'species'
+    WHEN o."ScientificName" = 'Microstegium vimineum' THEN 'species'
+    WHEN o."ScientificName" = 'Myriophyllum aquaticum' THEN 'species'
+    WHEN o."ScientificName" = 'Myriophyllum heterophyllum' THEN 'species'
+    WHEN o."ScientificName" = 'Trachemys scripta' THEN 'species'
+    WHEN o."ScientificName" = 'Ailanthus altissima' THEN 'species'
+    WHEN o."ScientificName" = 'Robinia spec.' THEN 'genus'
+    WHEN o."ScientificName" = 'Lepomis gibbosus' THEN 'species'
+    WHEN o."ScientificName" = 'Fallopia / Reynoutria' THEN 'genus'
+    WHEN o."ScientificName" = 'Crassula helmsii' THEN 'species'
+    WHEN o."ScientificName" = 'Prunus Serotina' THEN 'species'
+    WHEN o."ScientificName" = 'Fargesia' THEN 'genus'
+    WHEN o."ScientificName" = 'Lamiastrum galeobdolon subsp. argentatum' THEN 'subspecies'
+    WHEN o."ScientificName" = 'Solidago canadensis' THEN 'species'
+    WHEN o."ScientificName" = 'Rhus typhina' THEN 'species'
+    WHEN o."ScientificName" = 'Rosa rugosa' THEN 'species'
+    WHEN o."ScientificName" = 'Rosa multiflora' THEN 'species'
+    WHEN o."ScientificName" = 'Phytolacca americana' THEN 'species'
+    WHEN o."ScientificName" = 'Helianthus tuberosus' THEN 'species'
+    WHEN o."ScientificName" = 'Fallopia  baldschuanica' THEN 'species'
+    WHEN o."ScientificName" = 'Azolla filiculoides' THEN 'species'
+    WHEN o."ScientificName" = 'Harmonia axyridis' THEN 'species'
+    WHEN o."ScientificName" = 'Pistia statiotes' THEN 'species'
+    ELSE NULL
+  END                                   AS taxonRank,
   CASE
     WHEN o."DutchName" = 'Waterwaaier' THEN 'waterwaaier'
     WHEN o."DutchName" = 'Waterhyacint' THEN 'waterhyacint'

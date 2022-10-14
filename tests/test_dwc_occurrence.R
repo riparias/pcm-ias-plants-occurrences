@@ -5,7 +5,7 @@ library(dplyr)
 
 # read proposed new version of the DwC mapping
 occs_path <- here::here("data", "processed", "occurrence.csv")
-dwc_occurrence_update <- readr::read_csv(occs_path, guess_max = 10000)
+dwc_occurrence <- readr::read_csv(occs_path, guess_max = 10000)
 
 # tests
 testthat::test_that("Right columns in right order", {
@@ -14,43 +14,42 @@ testthat::test_that("Right columns in right order", {
     "language",
     "license",
     "rightsHolder",
-    "accessRights",
     "datasetID",
     "institutionCode",
     "datasetName",
     "basisOfRecord",
     "samplingProtocol",
     "occurrenceID",
-    "eventDate",
+    "occurrenceStatus",
     "organismQuantity",
     "organismQuantityType",
-    "individualCount",
-    "continent",
+    "eventDate",
     "countryCode",
-    "stateProvince",
     "decimalLatitude",
     "decimalLongitude",
     "geodeticDatum",
     "coordinateUncertaintyInMeters",
     "verbatimLatitude",
     "verbatimLongitude",
+    "verbatimCoordinateSystem",
     "verbatimSRS",
     "scientificName",
     "kingdom",
+    "taxonRank",
     "vernacularName"
   )
-  testthat::expect_equal(names(dwc_occurrence_update), columns)
+  testthat::expect_equal(names(dwc_occurrence), columns)
 })
 
 testthat::test_that("occurrenceID is always present and is unique", {
-  testthat::expect_true(all(!is.na(dwc_occurrence_update$occurrenceID)))
-  testthat::expect_equal(length(unique(dwc_occurrence_update$occurrenceID)),
-                         nrow(dwc_occurrence_update))
+  testthat::expect_true(all(!is.na(dwc_occurrence$occurrenceID)))
+  testthat::expect_equal(length(unique(dwc_occurrence$occurrenceID)),
+                         nrow(dwc_occurrence))
 })
 
 testthat::test_that("samplingProtocol is always Casual Observation", {
   testthat::expect_equal(
-    dwc_occurrence_update %>%
+    dwc_occurrence %>%
       dplyr::distinct(samplingProtocol) %>%
       dplyr::pull(samplingProtocol),
     "casual observation"
@@ -60,19 +59,19 @@ testthat::test_that("samplingProtocol is always Casual Observation", {
 testthat::test_that(
   "organismQuantity is always an integer greater than 0 if present", {
     organismQuantity_values <-
-      dwc_occurrence_update %>%
+      dwc_occurrence %>%
       dplyr::filter(!is.na(organismQuantity)) %>%
       dplyr::distinct(organismQuantity) %>%
       dplyr::pull(organismQuantity)
     testthat::expect_equal(
-      organismQuantity_values, as.integer(organismQuantity_values)
+      as.numeric(organismQuantity_values), as.integer(organismQuantity_values)
     )
 })
 
 testthat::test_that(
   "an organismQuantity must have a corresponding organismQuantityType", {
     organismQuantityType_values <-
-      dwc_occurrence_update %>%
+      dwc_occurrence %>%
       dplyr::filter(!is.na(organismQuantity)) %>%
       dplyr::distinct(organismQuantityType) %>%
       dplyr::pull(organismQuantityType)
@@ -80,10 +79,10 @@ testthat::test_that(
   })
 
 testthat::test_that(
-  "organismQuantityType is one of the predefined values", {
-    values <- c("coverage in m²", "individuals")
+  "organismQuantityType is one of the predefined values if not NA", {
+    values <- c("coverage in m²") # other value, individuals, doesn't occur yet
     organismQuantityType_values <-
-      dwc_occurrence_update %>%
+      dwc_occurrence %>%
       dplyr::filter(!is.na(organismQuantityType)) %>%
       dplyr::distinct(organismQuantityType) %>%
       dplyr::pull(organismQuantityType)
@@ -93,42 +92,50 @@ testthat::test_that(
 testthat::test_that("coordinates and uncertainties are always filled in", {
   # decimalLatitude
   testthat::expect_true(
-    all(!is.na(unique(dwc_occurrence_update$decimalLatitude)))
+    all(!is.na(dwc_occurrence$decimalLatitude))
   )
   # decimalLongitude
   testthat::expect_true(
-    all(!is.na(unique(dwc_occurrence_update$decimalLongitude)))
+    all(!is.na(dwc_occurrence$decimalLongitude))
   )
   # verbatimLatitude
   testthat::expect_true(
-    all(!is.na(unique(dwc_occurrence_update$verbatimLatitude)))
+    all(!is.na(dwc_occurrence$verbatimLatitude))
   )
   # verbatimLongitude
   testthat::expect_true(
-    all(!is.na(unique(dwc_occurrence_update$verbatimLongitude)))
+    all(!is.na(dwc_occurrence$verbatimLongitude))
   )
   # coordinateUncertaintyInMeters
   testthat::expect_true(
-    all(!is.na(unique(dwc_occurrence_update$coordinateUncertaintyInMeters)))
+    all(!is.na(dwc_occurrence$coordinateUncertaintyInMeters))
   )
 })
 
 testthat::test_that("decimalLatitude is within Flemish boundaries", {
-  testthat::expect_true(all(dwc_occurrence_update$decimalLatitude < 51.65))
-  testthat::expect_true(all(dwc_occurrence_update$decimalLatitude > 50.63))
-})
-
-testthat::test_that("decimalLongitude is always filled in", {
-  testthat::expect_true(all(!is.na(dwc_occurrence_update$decimalLongitude)))
+  testthat::expect_true(all(dwc_occurrence$decimalLatitude < 51.65))
+  testthat::expect_true(all(dwc_occurrence$decimalLatitude > 50.63))
 })
 
 testthat::test_that("decimalLongitude is within Flemish boundaries", {
-  testthat::expect_true(all(dwc_occurrence_update$decimalLongitude < 5.95))
-  testthat::expect_true(all(dwc_occurrence_update$decimalLongitude > 2.450))
+  testthat::expect_true(all(dwc_occurrence$decimalLongitude < 5.95))
+  testthat::expect_true(all(dwc_occurrence$decimalLongitude > 2.450))
+})
+
+testthat::test_that("verbatimLongitude is always a positive integer", {
+  testthat::expect_true(
+    all(dwc_occurrence$verbatimLongitude == as.integer(dwc_occurrence$verbatimLongitude))
+  )
+})
+
+testthat::test_that("verbatimLatitude is always a positive integer", {
+  testthat::expect_true(
+    all(dwc_occurrence$verbatimLatitude == as.integer(dwc_occurrence$verbatimLatitude))
+  )
 })
 
 testthat::test_that("eventDate is always filled in", {
-  testthat::expect_true(all(!is.na(dwc_occurrence_update$eventDate)))
+  testthat::expect_true(all(!is.na(dwc_occurrence$eventDate)))
 })
 
 testthat::test_that("scientificName is never NA and one of the list", {
@@ -144,7 +151,7 @@ testthat::test_that("scientificName is never NA and one of the list", {
     "Lagarosiphon major",
     "Lithobates catesbeianus",
     "Ludwigia grandiflora",
-    "Ludwigia peploides montevidensis",
+    "Ludwigia peploides subsp. montevidensis",
     "Lysichiton americanus",
     "Microstegium vimineum",
     "Myriophyllum aquaticum",
@@ -169,14 +176,22 @@ testthat::test_that("scientificName is never NA and one of the list", {
     "Harmonia axyridis",
     "Pistia statiotes"
   )
-  testthat::expect_true(all(!is.na(dwc_occurrence_update$scientificName)))
-  testthat::expect_true(all(dwc_occurrence_update$scientificName %in% species))
+  testthat::expect_true(all(!is.na(dwc_occurrence$scientificName)))
+  testthat::expect_true(all(dwc_occurrence$scientificName %in% species))
 })
 
 testthat::test_that("kingdom is always equal to Plantae or Animalia", {
-  testthat::expect_true(all(!is.na(dwc_occurrence_update$kingdom)))
+  testthat::expect_true(all(!is.na(dwc_occurrence$kingdom)))
   testthat::expect_true(
-    all(dwc_occurrence_update$kingdom %in% c("Plantae", "Animalia"))
+    all(dwc_occurrence$kingdom %in% c("Plantae", "Animalia"))
+  )
+})
+
+testthat::test_that("taxonRank is always filled in and one of the list", {
+  taxon_ranks <- c("genus", "species", "subspecies")
+  testthat::expect_true(all(!is.na(dwc_occurrence$taxonRank)))
+  testthat::expect_true(
+    all(dwc_occurrence$taxonRank %in% taxon_ranks)
   )
 })
 
@@ -219,7 +234,7 @@ testthat::test_that(
     )
     species_to_exclude <- c("Fargesia", "Reynoutria")
     occs_with_valid_vernacular_names <-
-      dwc_occurrence_update %>%
+      dwc_occurrence %>%
       dplyr::filter(!scientificName %in% species_to_exclude)
     testthat::expect_true(
       all(!is.na(occs_with_valid_vernacular_names$vernacularName))
