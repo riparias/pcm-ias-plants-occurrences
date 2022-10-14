@@ -7,10 +7,10 @@ SELECT
   'Event'                               AS type,
   'en'                                  AS language,
   'https://creativecommons.org/licenses/by-nc/4.0/legalcode' AS license,
-  'POV'                                 AS rightsHolder,
   'http://www.inbo.be/en/norms-for-data-use' AS accessRights,
+  'PCM'                                 AS rightsHolder,
   ''                                    AS datasetID,
-  'POV'                                 AS institutionCode,
+  'PCM'                                 AS institutionCode,
   'Monitoring of invasive alien species by the Provincial Center of Environmental Research, Province East-Flanders, Belgium' AS datasetName,
   'HumanObservation'                    AS basisOfRecord,
   o."SamplingProtocol"                  AS samplingProtocol, -- casual observation
