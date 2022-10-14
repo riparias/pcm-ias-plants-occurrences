@@ -14,7 +14,6 @@ testthat::test_that("Right columns in right order", {
     "language",
     "license",
     "rightsHolder",
-    "accessRights",
     "datasetID",
     "institutionCode",
     "datasetName",
@@ -24,7 +23,6 @@ testthat::test_that("Right columns in right order", {
     "eventDate",
     "organismQuantity",
     "organismQuantityType",
-    "individualCount",
     "continent",
     "countryCode",
     "stateProvince",
@@ -65,7 +63,7 @@ testthat::test_that(
       dplyr::distinct(organismQuantity) %>%
       dplyr::pull(organismQuantity)
     testthat::expect_equal(
-      organismQuantity_values, as.integer(organismQuantity_values)
+      as.numeric(organismQuantity_values), as.integer(organismQuantity_values)
     )
 })
 
