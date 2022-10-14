@@ -60,7 +60,7 @@ SELECT
     WHEN o."ScientificName" = 'Lagarosiphon major' THEN 'Lagarosiphon major'
     WHEN o."ScientificName" = 'Lithobates catesbeianus' THEN 'Lithobates catesbeianus'
     WHEN o."ScientificName" = 'Ludwigia grandiflora' THEN 'Ludwigia grandiflora'
-    WHEN o."ScientificName" = 'Ludwigia peploides montevidensis' THEN 'Ludwigia peploides montevidensis'
+    WHEN o."ScientificName" = 'Ludwigia peploides montevidensis' THEN 'Ludwigia peploides subsp. montevidensis'
     WHEN o."ScientificName" = 'Lysichiton americanus' THEN 'Lysichiton americanus'
     WHEN o."ScientificName" = 'Microstegium vimineum' THEN 'Microstegium vimineum'
     WHEN o."ScientificName" = 'Myriophyllum aquaticum' THEN 'Myriophyllum aquaticum'

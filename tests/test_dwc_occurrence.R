@@ -150,7 +150,7 @@ testthat::test_that("scientificName is never NA and one of the list", {
     "Lagarosiphon major",
     "Lithobates catesbeianus",
     "Ludwigia grandiflora",
-    "Ludwigia peploides montevidensis",
+    "Ludwigia peploides subsp. montevidensis",
     "Lysichiton americanus",
     "Microstegium vimineum",
     "Myriophyllum aquaticum",
