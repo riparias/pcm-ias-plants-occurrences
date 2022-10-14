@@ -125,6 +125,18 @@ testthat::test_that("decimalLongitude is within Flemish boundaries", {
   testthat::expect_true(all(dwc_occurrence$decimalLongitude > 2.450))
 })
 
+testthat::test_that("verbatimLongitude is always a positive integer", {
+  testthat::expect_true(
+    all(dwc_occurrence$verbatimLongitude == as.integer(dwc_occurrence$verbatimLongitude))
+  )
+})
+
+testthat::test_that("verbatimLatitude is always a positive integer", {
+  testthat::expect_true(
+    all(dwc_occurrence$verbatimLatitude == as.integer(dwc_occurrence$verbatimLatitude))
+  )
+})
+
 testthat::test_that("eventDate is always filled in", {
   testthat::expect_true(all(!is.na(dwc_occurrence$eventDate)))
 })

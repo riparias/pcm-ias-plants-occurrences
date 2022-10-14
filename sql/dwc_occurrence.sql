@@ -44,8 +44,8 @@ SELECT
     WHEN o."CoordinateUncertainty" IS NULL THEN 30
     ELSE o."CoordinateUncertainty"
   END                                   AS coordinateUncertaintyInMeters,
-  o.YLambert72                          AS verbatimLatitude,
-  o.XLambert72                          AS verbatimLongitude,
+  CAST(o."YLambert72" AS INT)           AS verbatimLatitude,
+  CAST(o."XLambert72" AS INT)           AS verbatimLongitude,
   'EPSG:31370'                          AS verbatimSRS,
 -- TAXON
   CASE
