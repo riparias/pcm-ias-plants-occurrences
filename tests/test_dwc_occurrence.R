@@ -91,23 +91,23 @@ testthat::test_that(
 testthat::test_that("coordinates and uncertainties are always filled in", {
   # decimalLatitude
   testthat::expect_true(
-    all(!is.na(unique(dwc_occurrence$decimalLatitude)))
+    all(!is.na(dwc_occurrence$decimalLatitude))
   )
   # decimalLongitude
   testthat::expect_true(
-    all(!is.na(unique(dwc_occurrence$decimalLongitude)))
+    all(!is.na(dwc_occurrence$decimalLongitude))
   )
   # verbatimLatitude
   testthat::expect_true(
-    all(!is.na(unique(dwc_occurrence$verbatimLatitude)))
+    all(!is.na(dwc_occurrence$verbatimLatitude))
   )
   # verbatimLongitude
   testthat::expect_true(
-    all(!is.na(unique(dwc_occurrence$verbatimLongitude)))
+    all(!is.na(dwc_occurrence$verbatimLongitude))
   )
   # coordinateUncertaintyInMeters
   testthat::expect_true(
-    all(!is.na(unique(dwc_occurrence$coordinateUncertaintyInMeters)))
+    all(!is.na(dwc_occurrence$coordinateUncertaintyInMeters))
   )
 })
 
