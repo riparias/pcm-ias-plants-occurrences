@@ -10,7 +10,7 @@ SELECT
   'PCM'                                 AS rightsHolder,
   ''                                    AS datasetID,
   'PCM'                                 AS institutionCode,
-  'Monitoring of invasive alien species by PRM in East Flanders, Belgium' AS datasetName,
+  'Monitoring of invasive alien species by the Provincial Center of Environmental Research (PCM) in East Flanders, Belgium' AS datasetName,
   'HumanObservation'                    AS basisOfRecord,
   o."SamplingProtocol"                  AS samplingProtocol, -- casual observation
 
