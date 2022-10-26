@@ -4,7 +4,7 @@
 
 ## Rationale
 
-This repository contains the functionality to standardize the alien plants data of the [Province East Flanders](https://www.oost-vlaanderen.be/) (POV) to a [Darwin Core Archive](https://ipt.gbif.org/manual/en/ipt/2.5/dwca-guide) that can be harvested by a [GBIF IPT](https://ipt.gbif.org/manual/en/ipt/2.5/).
+This repository contains the functionality to standardize the alien plants data of the [Provincial Center of Environmental Research](https://oost-vlaanderen.be/wonen-en-leven/natuur-en-milieu/provinciaal-centrumvoormilieuonderzoek.html) (PCM) of the [Province East Flanders](https://www.oost-vlaanderen.be/) to a [Darwin Core Archive](https://ipt.gbif.org/manual/en/ipt/2.5/dwca-guide) that can be harvested by a [GBIF IPT](https://ipt.gbif.org/manual/en/ipt/2.5/).
 
 ## Workflow
 
@@ -13,8 +13,8 @@ fetch data from WFS → save them as local [source data](data/raw) → Darwin Co
 
 ## Published dataset
 
-* [Dataset on the IPT](#) - TBD
-* [Dataset on GBIF](#) - TBD
+* [Dataset on the IPT](https://ipt.inbo.be/resource?r=pcm-ias-plant-occurrences)
+* [Dataset on GBIF](https://doi.org/10.15468/29cggt)
 
 ## Repo structure
 
