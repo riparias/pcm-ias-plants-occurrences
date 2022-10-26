@@ -8,7 +8,7 @@ SELECT
   'en'                                  AS language,
   'https://creativecommons.org/licenses/by-nc/4.0/legalcode' AS license,
   'PCM'                                 AS rightsHolder,
-  ''                                    AS datasetID,
+  'https://doi.org/10.15468/29cggt'     AS datasetID,
   'PCM'                                 AS institutionCode,
   'Monitoring of invasive alien species by the Provincial Center of Environmental Research (PCM) in East Flanders, Belgium' AS datasetName,
   'HumanObservation'                    AS basisOfRecord,

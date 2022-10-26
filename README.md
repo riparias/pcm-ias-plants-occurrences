@@ -13,8 +13,8 @@ fetch data from WFS → save them as local [source data](data/raw) → Darwin Co
 
 ## Published dataset
 
-* [Dataset on the IPT](#) - TBD
-* [Dataset on GBIF](#) - TBD
+* [Dataset on the IPT](https://ipt.inbo.be/resource?r=pcm-ias-plant-occurrences)
+* [Dataset on GBIF](https://doi.org/10.15468/29cggt)
 
 ## Repo structure
 
