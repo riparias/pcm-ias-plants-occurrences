@@ -76,7 +76,7 @@ The column `GMlID` is not present in the database of POV: it is added by the WFS
 raw_occurrences <- readr::read_csv(
   file = file_path,
   na = "",
-  col_types = readr::cols(.default = col_character())
+  col_types = readr::cols(.default = readr::col_character())
 )
 
 # remove GmlId column
