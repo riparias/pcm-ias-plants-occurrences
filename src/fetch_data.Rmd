@@ -24,6 +24,7 @@ Load libraries:
 library(httr) # generic webservice package
 library(ows4R) # interface for OGC webservices
 library(here) # to work with paths
+library(readr)  # to read files
 ```
 
 # Fetch data from WFS
