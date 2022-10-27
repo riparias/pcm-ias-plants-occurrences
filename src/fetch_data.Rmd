@@ -82,7 +82,7 @@ raw_occurrences <- readr::read_csv(
 # remove GmlId column
 raw_occurrences <- subset(raw_occurrences, select = -GmlId)
 
-# save raw occurrences (overwrite)
+# save raw occurrences (overwrite file)
 readr::write_csv(
   x = raw_occurrences,
   file = file_path,
