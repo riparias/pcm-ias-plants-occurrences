@@ -72,7 +72,7 @@ httr::GET(url = request, write_disk(file_path, overwrite = TRUE))
 The column `GMlID` is not present in the database of POV: it is added by the WFS service as a progressive number with the layer name as prefix. Removing this column from the raw data would increase the effectiveness of the git file change history tool, e.g. in case new observations are added at a certain row in the file.
 
 ```{r remove_GmlID}
-# read file
+# read raw occurrences
 raw_occurrences <- readr::read_csv(
   file = file_path,
   na = "",
