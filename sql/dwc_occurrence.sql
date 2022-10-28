@@ -7,10 +7,10 @@ SELECT
   'Event'                               AS type,
   'en'                                  AS language,
   'https://creativecommons.org/licenses/by-nc/4.0/legalcode' AS license,
-  'PCM'                                 AS rightsHolder,
+  'POV'                                 AS rightsHolder,
   'https://doi.org/10.15468/29cggt'     AS datasetID,
-  'PCM'                                 AS institutionCode,
-  'Monitoring of invasive alien species by the Provincial Center of Environmental Research (PCM) in East Flanders, Belgium' AS datasetName,
+  'POV'                                 AS institutionCode,
+  'Monitoring of invasive alien species by the Province East Flanders, Belgium' AS datasetName,
   'HumanObservation'                    AS basisOfRecord,
   o."SamplingProtocol"                  AS samplingProtocol, -- casual observation
 
