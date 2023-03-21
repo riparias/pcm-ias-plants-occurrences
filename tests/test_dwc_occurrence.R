@@ -238,7 +238,9 @@ testthat::test_that(
       "Chinese bruidssluier",
       "grote kroosvaren",
       "Veelkleurig Aziatisch lieveheersbeestje",
-      "watersla"
+      "watersla",
+      "Mantsjoerese wilde rijst",
+      "Leidse plant"
     )
     species_to_exclude <- c("Fargesia", "Reynoutria")
     occs_with_valid_vernacular_names <-
