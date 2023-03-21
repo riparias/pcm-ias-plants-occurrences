@@ -84,6 +84,8 @@ SELECT
     WHEN o."ScientificName" = 'Azolla filiculoides' THEN 'Azolla filiculoides'
     WHEN o."ScientificName" = 'Harmonia axyridis' THEN 'Harmonia axyridis'
     WHEN o."ScientificName" = 'Pistia statiotes' THEN 'Pistia statiotes'
+    WHEN o."ScientificName" = 'Zizania latifolia' THEN 'Zizania latifolia'
+    WHEN o."ScientificName" = 'Saururus cernuus' THEN 'Saururus cernuus'
     ELSE NULL
   END                                   AS scientificName,
   o."Kingdom"                           AS kingdom,
@@ -123,6 +125,8 @@ SELECT
     WHEN o."ScientificName" = 'Azolla filiculoides' THEN 'species'
     WHEN o."ScientificName" = 'Harmonia axyridis' THEN 'species'
     WHEN o."ScientificName" = 'Pistia statiotes' THEN 'species'
+    WHEN o."ScientificName" = 'Zizania latifolia' THEN 'species'
+    WHEN o."ScientificName" = 'Saururus cernuus' THEN 'species'
     ELSE NULL
   END                                   AS taxonRank,
   CASE
@@ -161,9 +165,12 @@ SELECT
     WHEN o."DutchName" = 'Grote kroosvaren' THEN 'grote kroosvaren'
     WHEN o."DutchName" = 'Veelkleurig Aziatisch lieveheersbeestje' THEN  'Veelkleurig Aziatisch lieveheersbeestje'
     WHEN o."DutchName" = 'Watersla' THEN 'watersla'
+    WHEN o."DutchName" = 'Mantsjoerese wilde rijst' THEN 'Mantsjoerese wilde rijst'
+    WHEN o."DutchName" = 'Leidse plant' THEN 'Leidse plant'
     ELSE NULL
   END                                   AS vernacularName
   FROM occurrences AS o
   WHERE
     -- Remove observations of multiple unidentified taxa
     o."ScientificName" != 'Meerdere soorten'
+
