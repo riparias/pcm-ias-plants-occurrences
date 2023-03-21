@@ -84,6 +84,8 @@ SELECT
     WHEN o."ScientificName" = 'Azolla filiculoides' THEN 'Azolla filiculoides'
     WHEN o."ScientificName" = 'Harmonia axyridis' THEN 'Harmonia axyridis'
     WHEN o."ScientificName" = 'Pistia statiotes' THEN 'Pistia statiotes'
+    WHEN o."ScientificName" = 'Zizania latifolia' THEN 'Zizania latifolia'
+    WHEN o."ScientificName" = 'Saururus cernuus' THEN 'Saururus cernuus'
     ELSE NULL
   END                                   AS scientificName,
   o."Kingdom"                           AS kingdom,
