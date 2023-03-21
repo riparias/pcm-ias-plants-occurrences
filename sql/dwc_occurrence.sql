@@ -125,6 +125,8 @@ SELECT
     WHEN o."ScientificName" = 'Azolla filiculoides' THEN 'species'
     WHEN o."ScientificName" = 'Harmonia axyridis' THEN 'species'
     WHEN o."ScientificName" = 'Pistia statiotes' THEN 'species'
+    WHEN o."ScientificName" = 'Zizania latifolia' THEN 'species'
+    WHEN o."ScientificName" = 'Saururus cernuus' THEN 'species'
     ELSE NULL
   END                                   AS taxonRank,
   CASE
