@@ -182,7 +182,11 @@ testthat::test_that("scientificName is never NA and one of the list", {
     "Harmonia axyridis",
     "Pistia statiotes",
     "Zizania latifolia",
-    "Saururus cernuus"
+    "Saururus cernuus",
+    "Salvinia molesta",
+    "Pistia stratiotes",
+    "Aponogeton distachyos",
+    "Petasites japonicus"
   )
   testthat::expect_true(all(!is.na(dwc_occurrence$scientificName)))
   testthat::expect_true(all(dwc_occurrence$scientificName %in% species))
@@ -237,10 +241,13 @@ testthat::test_that(
       "aardpeer",
       "Chinese bruidssluier",
       "grote kroosvaren",
-      "Veelkleurig Aziatisch lieveheersbeestje",
-      "watersla",
+      "veelkleurig Aziatisch lieveheersbeestje",
       "Mantsjoerese wilde rijst",
-      "Leidse plant"
+      "Leidse plant",
+      "grote vlotvaren",
+      "watersla",
+      "Kaapse waterlelie",
+      "Japans hoefblad"
     )
     species_to_exclude <- c("Fargesia", "Reynoutria")
     occs_with_valid_vernacular_names <-

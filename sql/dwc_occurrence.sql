@@ -86,11 +86,15 @@ SELECT
     WHEN o."ScientificName" = 'Pistia statiotes' THEN 'Pistia statiotes'
     WHEN o."ScientificName" = 'Zizania latifolia' THEN 'Zizania latifolia'
     WHEN o."ScientificName" = 'Saururus cernuus' THEN 'Saururus cernuus'
+    WHEN o."ScientificName" = 'Salvinia molesta' THEN 'Salvinia molesta'
+    WHEN o."ScientificName" = 'Pistia stratiotes' THEN 'Pistia stratiotes'
+    WHEN o."ScientificName" = 'Aponogeton distachyos' THEN 'Aponogeton distachyos'
+    WHEN o."ScientificName" = 'Petasites japonicus' THEN 'Petasites japonicus'
     ELSE NULL
   END                                   AS scientificName,
   o."Kingdom"                           AS kingdom,
   CASE
-        WHEN o."ScientificName" = 'Cabomba caroliniana' THEN 'species'
+    WHEN o."ScientificName" = 'Cabomba caroliniana' THEN 'species'
     WHEN o."ScientificName" = 'Eichhornia crassipes' THEN 'species'
     WHEN o."ScientificName" = 'Elodea nuttallii' THEN 'species'
     WHEN o."ScientificName" = 'Eriocheir sinensis' THEN 'species'
@@ -127,6 +131,10 @@ SELECT
     WHEN o."ScientificName" = 'Pistia statiotes' THEN 'species'
     WHEN o."ScientificName" = 'Zizania latifolia' THEN 'species'
     WHEN o."ScientificName" = 'Saururus cernuus' THEN 'species'
+    WHEN o."ScientificName" = 'Salvinia molesta' THEN 'species'
+    WHEN o."ScientificName" = 'Pistia stratiotes' THEN 'species'
+    WHEN o."ScientificName" = 'Aponogeton distachyos' THEN 'species'
+    WHEN o."ScientificName" = 'Petasites japonicus' THEN 'species'
     ELSE NULL
   END                                   AS taxonRank,
   CASE
@@ -163,10 +171,13 @@ SELECT
     WHEN o."DutchName" = 'Aardpeer' THEN 'aardpeer'
     WHEN o."DutchName" = 'Chinese bruidssluier' THEN 'Chinese bruidssluier'
     WHEN o."DutchName" = 'Grote kroosvaren' THEN 'grote kroosvaren'
-    WHEN o."DutchName" = 'Veelkleurig Aziatisch lieveheersbeestje' THEN  'Veelkleurig Aziatisch lieveheersbeestje'
-    WHEN o."DutchName" = 'Watersla' THEN 'watersla'
+    WHEN o."DutchName" = 'Veelkleurig Aziatisch lieveheersbeestje' THEN  'veelkleurig Aziatisch lieveheersbeestje'
     WHEN o."DutchName" = 'Mantsjoerese wilde rijst' THEN 'Mantsjoerese wilde rijst'
     WHEN o."DutchName" = 'Leidse plant' THEN 'Leidse plant'
+    WHEN o."DutchName" = 'Grote vlotvaren' THEN 'grote vlotvaren'
+    WHEN o."DutchName" = 'Watersla' THEN 'watersla'
+    WHEN o."DutchName" = 'Kaapse waterlelie' THEN 'Kaapse waterlelie'
+    WHEN o."DutchName" = 'Japans hoefblad' THEN 'Japans hoefblad'
     ELSE NULL
   END                                   AS vernacularName
   FROM occurrences AS o
