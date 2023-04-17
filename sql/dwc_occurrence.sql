@@ -94,7 +94,7 @@ SELECT
   END                                   AS scientificName,
   o."Kingdom"                           AS kingdom,
   CASE
-        WHEN o."ScientificName" = 'Cabomba caroliniana' THEN 'species'
+    WHEN o."ScientificName" = 'Cabomba caroliniana' THEN 'species'
     WHEN o."ScientificName" = 'Eichhornia crassipes' THEN 'species'
     WHEN o."ScientificName" = 'Elodea nuttallii' THEN 'species'
     WHEN o."ScientificName" = 'Eriocheir sinensis' THEN 'species'
