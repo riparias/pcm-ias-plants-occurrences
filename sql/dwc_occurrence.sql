@@ -171,7 +171,7 @@ SELECT
     WHEN o."DutchName" = 'Aardpeer' THEN 'aardpeer'
     WHEN o."DutchName" = 'Chinese bruidssluier' THEN 'Chinese bruidssluier'
     WHEN o."DutchName" = 'Grote kroosvaren' THEN 'grote kroosvaren'
-    WHEN o."DutchName" = 'Veelkleurig Aziatisch lieveheersbeestje' THEN  'Veelkleurig Aziatisch lieveheersbeestje'
+    WHEN o."DutchName" = 'Veelkleurig Aziatisch lieveheersbeestje' THEN  'veelkleurig Aziatisch lieveheersbeestje'
     WHEN o."DutchName" = 'Mantsjoerese wilde rijst' THEN 'Mantsjoerese wilde rijst'
     WHEN o."DutchName" = 'Leidse plant' THEN 'Leidse plant'
     WHEN o."DutchName" = 'Grote vlotvaren' THEN 'grote vlotvaren'
