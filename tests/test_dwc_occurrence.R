@@ -218,7 +218,7 @@ testthat::test_that(
       "reuzenberenklauw",
       "grote waternavel",
       "reuzenbalsemien",
-      "verspreidbladige waterpest",
+      "ruwe waterpest",
       "Amerikaanse stierkikker",
       "waterteunisbloem",
       "postelein-waterlepeltje",
