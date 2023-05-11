@@ -8,7 +8,8 @@ on:
     paths:
     - data/raw/**
     - src/**
-
+  workflow_dispatch:
+    branches: [ main ]
 
 name: fetch-data
 
