@@ -83,7 +83,7 @@ coords <- dplyr::as_tibble(st_coordinates(occurrences))
 occurrences <- 
   dplyr::as_tibble(occurrences) %>% 
   dplyr::bind_cols(coords) %>%
-  dplyr::select(-.data$Shape)
+  dplyr::select(-Shape)
 ```
 
 Preview:
