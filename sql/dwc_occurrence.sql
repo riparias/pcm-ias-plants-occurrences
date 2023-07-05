@@ -146,7 +146,7 @@ SELECT
     WHEN o."DutchName" = 'Reuzenberenklauw' THEN 'reuzenberenklauw'
     WHEN o."DutchName" = 'Grote waternavel' THEN 'grote waternavel'
     WHEN o."DutchName" = 'Reuzenbalsemien' THEN 'reuzenbalsemien'
-    WHEN o."DutchName" = '‘Ruwe waterpest’' THEN 'ruwe waterpest'
+    WHEN o."DutchName" = 'Ruwe waterpest' THEN 'ruwe waterpest'
     WHEN o."DutchName" = 'Amerikaanse stierkikker' THEN 'Amerikaanse stierkikker'
     WHEN o."DutchName" = 'Waterteunisbloem' THEN 'waterteunisbloem'
     WHEN o."DutchName" = 'Postelein-waterlepeltje (Kleine waterteunisbloem-subsoort)' THEN 'postelein-waterlepeltje'
