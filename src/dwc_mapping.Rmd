@@ -202,3 +202,9 @@ raw_sc_names <- dplyr::as_tibble(DBI::dbGetQuery(con, query))
 message("New values in field 'ScientificName' to be mapped:")
 print(raw_sc_names)
 ```
+
+Disconnect from database:
+
+```{r}
+DBI::dbDisconnect(con)
+```
