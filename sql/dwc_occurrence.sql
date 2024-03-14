@@ -161,7 +161,7 @@ SELECT
     WHEN o."DutchName" = 'Japanse en andere invasieve duizendknopen' THEN NULL
     WHEN o."DutchName" = 'Watercrassula' THEN 'watercrassula'
     WHEN o."DutchName" = 'Amerikaanse vogelkers' THEN 'Amerikaanse vogelkers'
-    WHEN o."DutchName" = 'Bamboe-groep' THEN NULL
+    WHEN o."DutchName" = 'Bamboe (soort)' THEN 'bamboe'
     WHEN o."DutchName" = 'Bonte gele dovenetel' THEN 'bonte gele dovenetel'
     WHEN o."DutchName" = 'Canadese guldenroede' THEN 'Canadese guldenroede'
     WHEN o."DutchName" = 'Fluweelboom' THEN 'fluweelboom'
