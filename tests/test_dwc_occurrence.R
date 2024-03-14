@@ -170,7 +170,7 @@ testthat::test_that("scientificName is never NA and one of the list", {
     "Crassula helmsii",
     "Prunus serotina",
     "Fargesia",
-    "Lamiastrum galeobdolon subsp. argentatum",
+    "Lamium galeobdolon subsp. argentatum",
     "Solidago canadensis",
     "Rhus typhina",
     "Rosa rugosa",
