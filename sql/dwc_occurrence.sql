@@ -73,7 +73,7 @@ SELECT
     WHEN o."ScientificName" = 'Crassula helmsii' THEN 'Crassula helmsii'
     WHEN o."ScientificName" = 'Prunus Serotina' THEN 'Prunus serotina'
     WHEN o."ScientificName" = 'Fargesia' THEN 'Fargesia'
-    WHEN o."ScientificName" = 'Lamiastrum galeobdolon subsp. argentatum' THEN 'Lamiastrum galeobdolon subsp. argentatum'
+    WHEN o."ScientificName" = 'Lamium galeobdolon subsp. argentatum' THEN 'Lamium galeobdolon subsp. argentatum'
     WHEN o."ScientificName" = 'Solidago canadensis' THEN 'Solidago canadensis'
     WHEN o."ScientificName" = 'Rhus typhina' THEN 'Rhus typhina'
     WHEN o."ScientificName" = 'Rosa rugosa' THEN 'Rosa rugosa'
@@ -118,7 +118,7 @@ SELECT
     WHEN o."ScientificName" = 'Crassula helmsii' THEN 'species'
     WHEN o."ScientificName" = 'Prunus Serotina' THEN 'species'
     WHEN o."ScientificName" = 'Fargesia' THEN 'genus'
-    WHEN o."ScientificName" = 'Lamiastrum galeobdolon subsp. argentatum' THEN 'subspecies'
+    WHEN o."ScientificName" = 'Lamium galeobdolon subsp. argentatum' THEN 'subspecies'
     WHEN o."ScientificName" = 'Solidago canadensis' THEN 'species'
     WHEN o."ScientificName" = 'Rhus typhina' THEN 'species'
     WHEN o."ScientificName" = 'Rosa rugosa' THEN 'species'
@@ -161,7 +161,7 @@ SELECT
     WHEN o."DutchName" = 'Japanse en andere invasieve duizendknopen' THEN NULL
     WHEN o."DutchName" = 'Watercrassula' THEN 'watercrassula'
     WHEN o."DutchName" = 'Amerikaanse vogelkers' THEN 'Amerikaanse vogelkers'
-    WHEN o."DutchName" = 'Bamboe-groep' THEN NULL
+    WHEN o."DutchName" = 'Bamboe (soort)' THEN 'bamboe'
     WHEN o."DutchName" = 'Bonte gele dovenetel' THEN 'bonte gele dovenetel'
     WHEN o."DutchName" = 'Canadese guldenroede' THEN 'Canadese guldenroede'
     WHEN o."DutchName" = 'Fluweelboom' THEN 'fluweelboom'
