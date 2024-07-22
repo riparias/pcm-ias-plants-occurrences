@@ -92,6 +92,14 @@ Preview:
 occurrences %>% head(5)
 ```
 
+# Arrange on ObservationIdentifier (= occurrenceID)
+
+```{r}
+occurrences <-
+  occurrences %>% 
+  dplyr::arrange(as.double(gsub("Exo_", "", ObservationIdentifier)))
+```
+
 # Create database
 
 Create a SQLite database with the source data, so it can be queried with SQL in the next steps:
